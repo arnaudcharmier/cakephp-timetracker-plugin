@@ -2,7 +2,7 @@ The Timetracker plugin for cakephp 2.x allow you manage your working time.
 
 #Requirements
 
-##Database Fields
+###Database Fields
 
 CREATE TABLE users (  
     id bigserial NOT NULL,  
@@ -19,4 +19,4 @@ Clone from github :
 in your plugin directory type git clone git://github.com/freega/cakephp-timetracker-plugin.git TimeTracker  
 Add as a git submodule :  
 in your plugin directory type git submodule add git://github.com/freega/cakephp-timetracker-plugin.git TimeTracker  
-Download an archive from github and extract it in /Plugin/timeTracker  
+Download an archive from github and extract it in /Plugin/TimeTracker  
