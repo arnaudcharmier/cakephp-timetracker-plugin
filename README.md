@@ -15,6 +15,8 @@ CREATE TABLE users (
 
 #Installation
 
-Clone from github : in your plugin directory type git clone git://github.com/freega/timeTracker.git timeTracker  
-Add as a git submodule : in your plugin directory type git submodule add git://github.com/freega/timeTracker.git timeTracker  
+Clone from github :  
+in your plugin directory type git clone git://github.com/freega/cakephp-timetracker-plugin.git TimeTracker  
+Add as a git submodule :  
+in your plugin directory type git submodule add git://github.com/freega/cakephp-timetracker-plugin.git TimeTracker  
 Download an archive from github and extract it in /Plugin/timeTracker  
