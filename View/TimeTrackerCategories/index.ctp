@@ -1,5 +1,5 @@
 <div class="timeTrackerCategories index">
-	<h2><?php echo __('Time Tracker Activities'); ?></h2>
+	<h2><?php echo __('Time Tracker Categories'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
@@ -27,10 +27,10 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Time Tracker Activity'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Time Tracker Customers'), array('controller' => 'time_tracker_customers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Time Tracker Customer'), array('controller' => 'time_tracker_customers', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Time Tracker Category'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('List Time Tracker Categories'), array('controller' => 'time_tracker_categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Time Tracker Category'), array('controller' => 'time_tracker_categories', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Parent Time Tracker Category'), array('controller' => 'time_tracker_categories', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('List Time Tracker Activities'), array('controller' => 'time_tracker_activities', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Time Tracker Activity'), array('controller' => 'time_tracker_activities', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
