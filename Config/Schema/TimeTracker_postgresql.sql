@@ -15,8 +15,7 @@ CREATE TABLE time_tracker_categories (
 );
 
 ALTER TABLE time_tracker_categories
-    ADD CONSTRAINT time_tracker_categories_pkey PRIMARY KEY(id),
-    ADD CONSTRAINT time_tracker_categories_name UNIQUE (name);
+    ADD CONSTRAINT time_tracker_categories_pkey PRIMARY KEY(id);
 
 
 CREATE TABLE time_tracker_customers (
@@ -46,4 +45,3 @@ CREATE TABLE time_tracker_activities (
 
 ALTER TABLE time_tracker_activities
     ADD CONSTRAINT time_tracker_activities_pkey PRIMARY KEY(id);
-
