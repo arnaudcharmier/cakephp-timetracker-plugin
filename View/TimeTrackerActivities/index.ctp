@@ -5,9 +5,9 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('date'); ?></th>
-			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('time_tracker_customer_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('time_tracker_category_id'); ?></th>
+			<th><?php echo $this->Paginator->sort('User'); ?></th>
+			<th><?php echo $this->Paginator->sort('Customer'); ?></th>
+			<th><?php echo $this->Paginator->sort('Category'); ?></th>
 			<th><?php echo $this->Paginator->sort('duration'); ?></th>
 			<th><?php echo $this->Paginator->sort('comment'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
@@ -21,7 +21,7 @@
 		<td><?php echo h($timeTrackerActivity['TimeTrackerActivity']['id']); ?>&nbsp;</td>
 		<td><?php echo h($timeTrackerActivity['TimeTrackerActivity']['date']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($timeTrackerActivity['User']['id'], array('controller' => 'users', 'action' => 'view', $timeTrackerActivity['User']['id'])); ?>
+			<?php echo $timeTrackerActivity['User']['firstname'] . ' ' . $timeTrackerActivity['User']['lastname']; ?>
 		</td>
 		<td>
 			<?php echo $this->Html->link($timeTrackerActivity['TimeTrackerCustomer']['name'], array('controller' => 'time_tracker_customers', 'action' => 'view', $timeTrackerActivity['TimeTrackerCustomer']['id'])); ?>

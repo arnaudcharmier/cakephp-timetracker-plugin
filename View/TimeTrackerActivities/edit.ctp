@@ -5,10 +5,10 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('date');
-		echo $this->Form->input('user_id');
-		echo $this->Form->input('time_tracker_customer_id');
-		echo $this->Form->input('time_tracker_category_id');
-		echo $this->Form->input('duration');
+		echo $this->Form->input('user_id', array('type' => 'hidden'));
+        echo $this->Form->input('time_tracker_customer_id', array('label' => 'Customer', 'empty' => __('Choose a customer')));
+        echo $this->Form->input('time_tracker_category_id', array('label' => 'Category', 'empty' => __('Choose a category')));
+        echo $this->Form->input('duration', array('type' => 'text', 'placeholder' => "00:00:00"));
 		echo $this->Form->input('comment');
 	?>
 	</fieldset>
