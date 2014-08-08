@@ -22,8 +22,23 @@ class TimeTrackerCategory extends TimeTrackerAppModel {
  */
     public $actsAs = array('Tree');
 
+/**
+ * Validation rules
+ *
+ * @var array
+ */
+    public $validate = array(
+        'name' => array(
+            'name' => array(
+                'rule' => 'notEmpty',
+                'message' => 'Thank you to enter a name.',
+                'allowEmpty' => false,
+                'required' => true,
+            ),
+        ),
+    );
 
-    //The Associations below have been created with all possible keys, those that are not needed can be removed
+//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
  * belongsTo associations
@@ -32,14 +47,13 @@ class TimeTrackerCategory extends TimeTrackerAppModel {
  */
     public $belongsTo = array(
         'ParentTimeTrackerCategory' => array(
-            'className' => 'TimeTrackerCategory',
+            'className' => 'TimeTracker.TimeTrackerCategory',
             'foreignKey' => 'parent_id',
             'conditions' => '',
             'fields' => '',
             'order' => ''
         )
     );
-
 /**
  * hasMany associations
  *
@@ -47,7 +61,7 @@ class TimeTrackerCategory extends TimeTrackerAppModel {
  */
     public $hasMany = array(
         'TimeTrackerActivity' => array(
-            'className' => 'TimeTrackerActivity',
+            'className' => 'TimeTracker.TimeTrackerActivity',
             'foreignKey' => 'time_tracker_category_id',
             'dependent' => false,
             'conditions' => '',
@@ -60,7 +74,7 @@ class TimeTrackerCategory extends TimeTrackerAppModel {
             'counterQuery' => ''
         ),
         'ChildTimeTrackerCategory' => array(
-            'className' => 'TimeTrackerCategory',
+            'className' => 'TimeTracker.TimeTrackerCategory',
             'foreignKey' => 'parent_id',
             'dependent' => false,
             'conditions' => '',
@@ -73,5 +87,7 @@ class TimeTrackerCategory extends TimeTrackerAppModel {
             'counterQuery' => ''
         )
     );
+
+
 
 }

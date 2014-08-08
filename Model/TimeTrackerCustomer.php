@@ -20,37 +20,15 @@ class TimeTrackerCustomer extends TimeTrackerAppModel {
  * @var array
  */
 	public $validate = array(
-		'name' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'created' => array(
-			'datetime' => array(
-				'rule' => array('datetime'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'modified' => array(
-			'datetime' => array(
-				'rule' => array('datetime'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+        'name' => array(
+            'name' => array(
+                'rule' => 'notEmpty',
+                'message' => 'Thank you to enter a name.',
+                'allowEmpty' => false,
+                'required' => true,
+            ),
+        ),
+    );
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
@@ -61,7 +39,7 @@ class TimeTrackerCustomer extends TimeTrackerAppModel {
  */
 	public $hasMany = array(
 		'TimeTrackerActivity' => array(
-			'className' => 'TimeTrackerActivity',
+			'className' => 'TimeTracker.TimeTrackerActivity',
 			'foreignKey' => 'time_tracker_customer_id',
 			'dependent' => false,
 			'conditions' => '',

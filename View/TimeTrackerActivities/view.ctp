@@ -16,12 +16,12 @@
 			<?php echo $this->Html->link($timeTrackerActivity['User']['id'], array('controller' => 'users', 'action' => 'view', $timeTrackerActivity['User']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Time Tracker Customer'); ?></dt>
+		<dt><?php echo __('Customer'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($timeTrackerActivity['TimeTrackerCustomer']['name'], array('controller' => 'time_tracker_customers', 'action' => 'view', $timeTrackerActivity['TimeTrackerCustomer']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Time Tracker Category'); ?></dt>
+		<dt><?php echo __('Category'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($timeTrackerActivity['TimeTrackerCategory']['name'], array('controller' => 'time_tracker_categories', 'action' => 'view', $timeTrackerActivity['TimeTrackerCategory']['id'])); ?>
 			&nbsp;

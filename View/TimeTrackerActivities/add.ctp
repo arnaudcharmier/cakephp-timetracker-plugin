@@ -1,9 +1,48 @@
 <div class="timeTrackerActivities form">
+<?php if(!empty($activitiesUserByDate)){ ?>
+    <fieldset>
+        <legend><?php echo __('My Times Trackers Activities'); ?></legend>
+        <table class="table table-hover list table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th><?php echo __("ID"); ?></th>
+                    <th><?php echo __("Date"); ?></th>
+                    <th><?php echo __("Catégorie"); ?></th>
+                    <th><?php echo __("Durée"); ?></th>
+                    <th class="hidden-phone hidden-tablet"><?php echo  __("Crée le"); ?></th>
+                    <th class="hidden-phone hidden-tablet"><?php echo __("Modifié le"); ?></th>
+                    <th class="text-center"><?php echo __("Actions"); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($activitiesUserByDate as $activityUserByDate): ?>
+                <tr>
+                    <td><?php echo h($activityUserByDate['TimeTrackerActivity']['id']); ?>&nbsp;</td>
+                    <td><?php echo h($activityUserByDate['TimeTrackerActivity']['date']); ?>&nbsp;</td>
+                    <td><?php echo $this->Html->link($activityUserByDate['TimeTrackerCategory']['name'], array('controller' => 'time_tracker_categories', 'action' => 'view', $activityUserByDate['TimeTrackerCategory']['name'])); ?></td>
+                    <td><?php echo h($activityUserByDate['TimeTrackerActivity']['duration']); ?>&nbsp;</td>
+                    <td class="hidden-phone hidden-tablet"><?php echo h($activityUserByDate['TimeTrackerActivity']['created_humanized']); ?>&nbsp;</td>
+                    <td class="hidden-phone hidden-tablet"><?php echo h($activityUserByDate['TimeTrackerActivity']['modified_humanized']); ?>&nbsp;</td>
+                    <td class="text-center">
+                        <?php echo $this->Html->link(__('View'), array('action' => 'view', $activityUserByDate['TimeTrackerActivity']['id'])); ?>
+                        <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $activityUserByDate['TimeTrackerActivity']['id'])); ?>
+                        <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $activityUserByDate['TimeTrackerActivity']['id']), array(), __('Are you sure you want to delete # %s?', $activityUserByDate['TimeTrackerActivity']['id'])); ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </fieldset>
+<?php } ?>
 <?php echo $this->Form->create('TimeTrackerActivity'); ?>
     <fieldset>
         <legend><?php echo __('Add Time Tracker Activity'); ?></legend>
     <?php
-        echo $this->Form->input('date');
+        if(!empty($dateFilter)){
+            echo $this->Form->input('date', array('type' => 'hidden', 'value' => $dateFilter));
+        } else {
+            echo $this->Form->input('date');
+        }
         echo $this->Form->input('time_tracker_customer_id', array('label' => 'Customer', 'empty' => __('Choose a customer')));
         echo $this->Form->input('time_tracker_category_id', array('label' => 'Category', 'empty' => __('Choose a category')));
         echo $this->Form->input('duration', array('type' => 'text', 'placeholder' => "00:00:00"));

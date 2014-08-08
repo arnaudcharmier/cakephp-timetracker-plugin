@@ -24,7 +24,6 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
  */
     public function index() {
         $timeTrackerCategories = $this->TimeTrackerCategory->generateTreeList(null, null, null, '　');
-
         $this->set(compact('timeTrackerCategories'));
     }
 
@@ -39,8 +38,43 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         if (!$this->TimeTrackerCategory->exists($id)) {
             throw new NotFoundException(__('Invalid time tracker category'));
         }
-        $options = array('conditions' => array('TimeTrackerCategory.' . $this->TimeTrackerCategory->primaryKey => $id));
-        $this->set('timeTrackerCategory', $this->TimeTrackerCategory->find('first', $options));
+
+
+        $timeTrackerCategory = $this->TimeTrackerCategory->find('first', array(
+            'conditions' => array(
+                'TimeTrackerCategory.' . $this->TimeTrackerCategory->primaryKey => $id
+            ),
+            'contain' => array(
+                'ParentTimeTrackerCategory',
+                'timeTrackerCategoryChild'
+            ),
+        ));
+
+        $timeTrackerCategoryChildren = $this->TimeTrackerCategory->children($id);
+
+        // Recherche des TimeTrackerActivity et Users
+        $conditions = array(
+            'TimeTrackerActivity.time_tracker_category_id' => $id
+
+        );
+        $order  = array('TimeTrackerActivity.date ASC');
+        $fields = array(
+            'TimeTrackerActivity.id',
+            'TimeTrackerActivity.date',
+            'TimeTrackerActivity.duration',
+            'TimeTrackerActivity.created',
+            'TimeTrackerActivity.modified',
+            'TimeTrackerCategory.name',
+            'TimeTrackerCustomer.name',
+            Configure::read('user.model') . '.firstname',
+            Configure::read('user.model') . '.lastname',
+
+        );
+
+        $TimeTrackerActivity    = ClassRegistry::init('TimeTracker.TimeTrackerActivity');
+        $timeTrackerActivities = $TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields));
+
+        $this->set(compact('timeTrackerCategory', 'timeTrackerActivities', 'timeTrackerCategoryChildren'));
     }
 
 /**
@@ -60,7 +94,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
                 $this->Session->setFlash(__('The time tracker category could not be saved. Please, try again.'));
             }
         }
-        $parentTimeTrackerCategories = $this->TimeTrackerCategory->ParentTimeTrackerCategory->find('list');
+        $parentTimeTrackerCategories = $this->TimeTrackerCategory->ParentTimeTrackerCategory->generateTreeList(null, null, null, '　');
         $this->set(compact('parentTimeTrackerCategories'));
     }
 
@@ -89,7 +123,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
             $options = array('conditions' => array('TimeTrackerCategory.' . $this->TimeTrackerCategory->primaryKey => $id));
             $this->request->data = $this->TimeTrackerCategory->find('first', $options);
         }
-        $parentTimeTrackerCategories = $this->TimeTrackerCategory->ParentTimeTrackerCategory->find('list');
+        $parentTimeTrackerCategories = $this->TimeTrackerCategory->ParentTimeTrackerCategory->generateTreeList(null, null, null, '　');
         $this->set(compact('parentTimeTrackerCategories'));
     }
 
@@ -130,7 +164,6 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
             return $this->redirect($this->referer());
         }
 
-        $this->request->allowMethod('post', 'delete');
 
         if ($this->TimeTrackerCategory->removeFromTree($id, true)) {
             $this->Session->setFlash(__('The time tracker category has been deleted.'));
@@ -160,7 +193,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $this->TimeTrackerCategory->id = $id;
 
         if(($this->TimeTrackerCategory->moveUp($id, abs($delta))) == false) {
-            $this->Session->setFlash(__('This time tracker category can not go above'));
+            $this->Session->setFlash(__('This time tracker category can not go above'), 'flash', array('type' => 'error'));
         }
         $this->redirect(array('action' => 'index'));
     }
@@ -185,7 +218,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $this->TimeTrackerCategory->id = $id;
 
         if($this->TimeTrackerCategory->moveDown($id, abs($delta)) == false) {
-            $this->Session->setFlash(__('This time tracker category can not go lower'));
+            $this->Session->setFlash(__('This time tracker category can not go lower'), 'flash', array('type' => 'error'));
         }
         $this->redirect(array('action' => 'index'));
     }
