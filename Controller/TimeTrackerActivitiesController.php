@@ -162,8 +162,6 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             // Prepare array
             //$dataToSave['TimeTrackerActivity']['date']     = date('Y/m/d', strtotime(str_replace('/', '-', $dataToSave['TimeTrackerActivity']['date'])));
             $dataToSave['TimeTrackerActivity']['user_id']  = $this->Auth->user('id');
-            pr($timeLeft);
-            pr($dataToSave['TimeTrackerActivity']['duration']);
             if($dataToSave['TimeTrackerActivity']['duration'] > $timeLeft) {
                 $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
                 return $this->redirect($this->referer());
@@ -265,4 +263,59 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
     }
 
 
+    public function export(){
+        // Recherche des TimeTrackerActivity et Users
+
+        $order  = array('TimeTrackerActivity.date ASC');
+        $fields = array(
+            'TimeTrackerActivity.id',
+            'TimeTrackerActivity.date',
+            'TimeTrackerActivity.duration',
+            'TimeTrackerActivity.comment',
+            'TimeTrackerActivity.created',
+            'TimeTrackerActivity.modified',
+            'TimeTrackerCategory.id',
+            'TimeTrackerCategory.name',
+            Configure::read('user.model') . '.id',
+            Configure::read('user.model') . '.' . Configure::read('user.firstname'),
+            Configure::read('user.model') . '.' . Configure::read('user.lastname'),
+            'TimeTrackerCustomer.id',
+            'TimeTrackerCustomer.name',
+
+        );
+
+        $joins  = array(
+            array(
+                'table' => Configure::read('user.table'),
+                'alias' => Configure::read('user.model'),
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.user_id = ' . Configure::read('user.model') . '.id',
+                ),
+            ),
+            array(
+                'table' => 'time_tracker_categories',
+                'alias' => 'TimeTrackerCategory',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
+                ),
+            ),
+            array(
+                'table' => 'time_tracker_customers',
+                'alias' => 'TimeTrackerCustomer',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_customer_id = TimeTrackerCustomer.id',
+                ),
+            ),
+        );
+
+        $TimeTrackerActivity    = ClassRegistry::init('TimeTracker.TimeTrackerActivity');
+        $timeTrackerActivities = $TimeTrackerActivity->find('all', array('order' => $order, 'fields' => $fields, 'joins' => $joins));
+        $this->set(compact('timeTrackerActivities'));
+    }
 }
