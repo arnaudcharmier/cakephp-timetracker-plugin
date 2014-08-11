@@ -60,16 +60,45 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             'TimeTrackerCategory.id',
             'TimeTrackerCategory.name',
             Configure::read('user.model') . '.id',
-            Configure::read('user.model') . '.firstname',
-            Configure::read('user.model') . '.lastname',
+            Configure::read('user.model') . '.' . Configure::read('user.firstname'),
+            Configure::read('user.model') . '.' . Configure::read('user.lastname'),
             'TimeTrackerCustomer.id',
             'TimeTrackerCustomer.name',
 
         );
+
+        $joins  = array(
+            array(
+                'table' => Configure::read('user.table'),
+                'alias' => Configure::read('user.model'),
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.user_id = ' . Configure::read('user.model') . '.id',
+                ),
+            ),
+            array(
+                'table' => 'time_tracker_categories',
+                'alias' => 'TimeTrackerCategory',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
+                ),
+            ),
+            array(
+                'table' => 'time_tracker_customers',
+                'alias' => 'TimeTrackerCustomer',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_customer_id = TimeTrackerCustomer.id',
+                ),
+            ),
+        );
+
         $TimeTrackerActivity    = ClassRegistry::init('TimeTracker.TimeTrackerActivity');
-        $timeTrackerActivity = $this->TimeTrackerActivity->find('first', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields));
-
-
+        $timeTrackerActivity = $TimeTrackerActivity->find('first', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields, 'joins' => $joins));
         $this->set(compact('timeTrackerActivity'));
     }
 
@@ -83,16 +112,43 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         // Recovery activities that date
         $activitiesUserByDate = array();
         $dateFilter = '';
+        $totalTimeWorked = '00:00:00';
         if(!empty($date)){
             $conditions = array(
                 'TimeTrackerActivity.date'    => $date,
                 'TimeTrackerActivity.user_id' => $this->Auth->user('id'),
             );
-            $contain = array('TimeTrackerCategory');
-            $activitiesUserByDate = $this->TimeTrackerActivity->find('all', array('conditions' => $conditions, 'contain' => $contain));
+            $order  = array('TimeTrackerActivity.date ASC');
+            $fields = array(
+                'TimeTrackerActivity.id',
+                'TimeTrackerActivity.date',
+                'TimeTrackerActivity.duration',
+                'TimeTrackerActivity.comment',
+                'TimeTrackerActivity.created',
+                'TimeTrackerActivity.modified',
+                'TimeTrackerCategory.id',
+                'TimeTrackerCategory.name',
+            );
+
+            $joins  = array(
+                array(
+                    'table' => 'time_tracker_categories',
+                    'alias' => 'TimeTrackerCategory',
+                    'type' => 'inner',
+                    'foreignKey' => false,
+                    'conditions' => array(
+                        'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
+                    ),
+                ),
+            );
+            $activitiesUserByDate = $this->TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'joins' => $joins, 'fields' => $fields));
+
+            // Calculating total time worked
+            foreach ($activitiesUserByDate as $activityUserByDate) {
+                $totalTimeWorked = TimeUtil::additionTime($totalTimeWorked, $activityUserByDate['TimeTrackerActivity']['duration']);
+            }
 
             $dateFilter = $date;
-
 
 
         }
@@ -112,7 +168,6 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
                 $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
                 return $this->redirect($this->referer());
             }
-
             $this->TimeTrackerActivity->create();
             if ($this->TimeTrackerActivity->save($dataToSave)) {
                 $this->Session->setFlash(__('The time tracker activity has been saved.'));
@@ -127,12 +182,12 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         }
 
 
-        $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories', 'activitiesUserByDate', 'dateFilter'));
+        $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories', 'activitiesUserByDate', 'dateFilter', 'totalTimeWorked'));
     }
 
 /**
  * edit method
- *
+ *a
  * @throws NotFoundException
  * @param string $id
  * @return void
@@ -208,4 +263,6 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         }
         return $this->redirect(array('action' => 'index'));
     }
+
+
 }

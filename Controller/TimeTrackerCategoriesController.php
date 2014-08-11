@@ -71,8 +71,47 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
 
         );
 
+        $joins  = array(
+            array(
+                'table' => 'time_tracker_categories',
+                'alias' => 'TimeTrackerCategory',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
+                ),
+            ),
+            array(
+                'table' => Configure::read('user.table'),
+                'alias' => Configure::read('user.model'),
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.user_id = ' . Configure::read('user.model') . '.id',
+                ),
+            ),
+            array(
+                'table' => 'time_tracker_customers',
+                'alias' => 'TimeTrackerCustomer',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_customer_id = TimeTrackerCustomer.id',
+                ),
+            ),
+            array(
+                'table' => 'time_tracker_categories',
+                'alias' => 'TimeTrackerCategory ',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerCategory.parent_id = TimeTrackerCategory .id',
+                ),
+            ),
+
+        );
         $TimeTrackerActivity    = ClassRegistry::init('TimeTracker.TimeTrackerActivity');
-        $timeTrackerActivities = $TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields));
+        $timeTrackerActivities = $TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields, 'joins' => $joins));
 
         $this->set(compact('timeTrackerCategory', 'timeTrackerActivities', 'timeTrackerCategoryChildren'));
     }

@@ -143,10 +143,8 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
         if ($state == 'before') {
             return $query;
         }
-
         $hoursWorkedPerCategory = array();
         foreach ($results as $result) {
-
             if(empty($hoursWorkedPerCategory[$result['TimeTrackerCategory']['name']])) {
                 $hoursWorkedPerCategory[$result['TimeTrackerCategory']['name']] = '00:00:00';
             }

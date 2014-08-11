@@ -19,7 +19,8 @@
                 <tr>
                     <td><?php echo h($activityUserByDate['TimeTrackerActivity']['id']); ?>&nbsp;</td>
                     <td><?php echo h($activityUserByDate['TimeTrackerActivity']['date']); ?>&nbsp;</td>
-                    <td><?php echo $this->Html->link($activityUserByDate['TimeTrackerCategory']['name'], array('controller' => 'time_tracker_categories', 'action' => 'view', $activityUserByDate['TimeTrackerCategory']['name'])); ?></td>
+                    <td><?php echo $this->Html->link($activityUserByDate['TimeTrackerCategory']['name'],
+                    array('controller' => 'time_tracker_categories', 'action' => 'view', $activityUserByDate['TimeTrackerCategory']['id'])); ?></td>
                     <td><?php echo h($activityUserByDate['TimeTrackerActivity']['duration']); ?>&nbsp;</td>
                     <td class="hidden-phone hidden-tablet"><?php echo h($activityUserByDate['TimeTrackerActivity']['created_humanized']); ?>&nbsp;</td>
                     <td class="hidden-phone hidden-tablet"><?php echo h($activityUserByDate['TimeTrackerActivity']['modified_humanized']); ?>&nbsp;</td>

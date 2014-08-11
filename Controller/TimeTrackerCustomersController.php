@@ -57,8 +57,30 @@ class TimeTrackerCustomersController extends TimeTrackerAppController {
             Configure::read('user.model') . '.lastname',
 
         );
+
+        $joins  = array(
+            array(
+                'table' => Configure::read('user.table'),
+                'alias' => Configure::read('user.model'),
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.user_id = ' . Configure::read('user.model') . '.id',
+                ),
+            ),
+            array(
+                'table' => 'time_tracker_categories',
+                'alias' => 'TimeTrackerCategory',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
+                ),
+            ),
+        );
+
         $TimeTrackerActivity    = ClassRegistry::init('TimeTracker.TimeTrackerActivity');
-        $timeTrackerActivities = $TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields));
+        $timeTrackerActivities = $TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields, 'joins' => $joins));
 
         // On prépare le tableau pour cal-heatmap
         $dateYearBefore = strftime("%y-%m-%d", mktime(0, 0, 0, '01', '01', date('y') - 1));
@@ -73,16 +95,55 @@ class TimeTrackerCustomersController extends TimeTrackerAppController {
             )
         ));
 
+        $joinsUser = array(
+            array(
+                'table' => Configure::read('user.table'),
+                'alias' => Configure::read('user.model'),
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.user_id = ' . Configure::read('user.model') . '.id',
+                ),
+            )
+        );
+        $fieldsUser = array(
+            'TimeTrackerActivity.id',
+            'TimeTrackerActivity.duration',
+            Configure::read('user.model') . '.firstname',
+            Configure::read('user.model') . '.lastname',
+
+        );
         $activitiesCustomerByUser = $TimeTrackerActivity->find('hoursWorkedPerUser', array(
             'conditions' => array(
                 'TimeTrackerActivity.time_tracker_customer_id' => $id
-            )
+            ),
+            'joins' => $joinsUser,
+            'fields' => $fieldsUser
         ));
 
+        $joinsCat = array(
+            array(
+                'table' => 'time_tracker_categories',
+                'alias' => 'TimeTrackerCategory',
+                'type' => 'inner',
+                'foreignKey' => false,
+                'conditions' => array(
+                    'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
+                ),
+            ),
+        );
+        $fieldsCat = array(
+            'TimeTrackerActivity.id',
+            'TimeTrackerActivity.duration',
+            'TimeTrackerCategory.name',
+
+        );
         $activitiesCustomerByCategory = $TimeTrackerActivity->find('hoursWorkedPerCategory', array(
             'conditions' => array(
                 'TimeTrackerActivity.time_tracker_customer_id' => $id
-            )
+            ),
+            'joins' => $joinsCat,
+            'fields' => $fieldsCat
         ));
 
         $this->set(compact('timeTrackerCustomer', 'timeTrackerActivities', 'activitiesCustomerByDay', 'activitiesCustomerByUser', 'activitiesCustomerByCategory'));
