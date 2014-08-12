@@ -7,10 +7,10 @@
                 <tr>
                     <th><?php echo __("ID"); ?></th>
                     <th><?php echo __("Date"); ?></th>
-                    <th><?php echo __("Catégorie"); ?></th>
-                    <th><?php echo __("Durée"); ?></th>
-                    <th class="hidden-phone hidden-tablet"><?php echo  __("Crée le"); ?></th>
-                    <th class="hidden-phone hidden-tablet"><?php echo __("Modifié le"); ?></th>
+                    <th><?php echo __("Category"); ?></th>
+                    <th><?php echo __("Duration"); ?></th>
+                    <th class="hidden-phone hidden-tablet"><?php echo  __("Created"); ?></th>
+                    <th class="hidden-phone hidden-tablet"><?php echo __("Modified"); ?></th>
                     <th class="text-center"><?php echo __("Actions"); ?></th>
                 </tr>
             </thead>

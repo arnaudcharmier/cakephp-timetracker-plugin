@@ -84,8 +84,8 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
         }
         return $resultats;
     }
-
     public function durationToDayByUser($date, $user) {
+        debug($date);
         // Recovery time remaining for this date
         $conditions = array(
             'TimeTrackerActivity.user_id' => $user,
@@ -97,7 +97,7 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
         $timeTrackerActivities = $this->find('all', array('conditions' => $conditions, 'fields' => $fields));
 
         $timeLeft = '00:00:00';
-
+        debug($timeTrackerActivities);
         foreach ($timeTrackerActivities as $timeTrackerActivity) {
             $timeLeft = TimeUtil::additionTime($timeLeft, $timeTrackerActivity['TimeTrackerActivity']['duration']);
         }

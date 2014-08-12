@@ -27,7 +27,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
  * @return void
  */
     public function index() {
-        $this->TimeTrackerActivity->recursive = 0;
+        $this->TimeTrackerActivity->recursive = -1;
         $this->TimeTrackerActivity->contain = array('User');
         $this->set('timeTrackerActivities', $this->Paginator->paginate());
     }
@@ -154,9 +154,16 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         }
         if ($this->request->is('post')) {
             $dataToSave = $this->request->data;
-
+            if(empty($date)){
+                if(is_array($dataToSave['TimeTrackerActivity']['date'])) {
+                    $date = $dataToSave['TimeTrackerActivity']['date']['year'] . '-' . $dataToSave['TimeTrackerActivity']['date']['month'] . '-' . $dataToSave['TimeTrackerActivity']['date']['day'];
+                } else {
+                    $date = $dataToSave['TimeTrackerActivity']['date'];
+                }
+            }
             // Recovery time remaining for this date
             $durationAll = $this->TimeTrackerActivity->durationToDayByUser($date, $this->Auth->user('id'));
+            debug($durationAll);
             $timeLeft    = TimeUtil::subtractionTime(Configure::read('hoursInWorkDay'), $durationAll);
 
             // Prepare array
@@ -164,9 +171,9 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             if(!is_array($dataToSave['TimeTrackerActivity']['date'])){
                 $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
             }
-
             if($dataToSave['TimeTrackerActivity']['duration'] > $timeLeft) {
                 $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
+                $this->request->data = $dataToSave;
                 return $this->redirect($this->referer());
             }
             $this->TimeTrackerActivity->create();

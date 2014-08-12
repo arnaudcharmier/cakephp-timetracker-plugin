@@ -4,27 +4,22 @@
 		<dt><?php echo __('Id'); ?></dt>
 		<dd>
 			<?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['id']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Name'); ?></dt>
 		<dd>
 			<?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['name']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Comment'); ?></dt>
 		<dd>
 			<?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['comment']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['created']); ?>
-			&nbsp;
 		</dd>
 		<dt><?php echo __('Modified'); ?></dt>
 		<dd>
 			<?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['modified']); ?>
-			&nbsp;
 		</dd>
 	</dl>
 </div>

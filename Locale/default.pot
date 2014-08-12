@@ -1,0 +1,572 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2014-08-12 14:49+0200\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/TimeTrackerActivitiesController.php:44;204;263
+msgid "Invalid time tracker activity"
+msgstr ""
+
+#: Controller/TimeTrackerActivitiesController.php:175;226
+msgid "The seizure duration is greater than the time remaining on that date. Please, try again."
+msgstr ""
+
+#: Controller/TimeTrackerActivitiesController.php:181;233
+msgid "The time tracker activity has been saved."
+msgstr ""
+
+#: Controller/TimeTrackerActivitiesController.php:184;236
+msgid "The time tracker activity could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/TimeTrackerActivitiesController.php:209
+msgid "You can not change what he does not belong to you."
+msgstr ""
+
+#: Controller/TimeTrackerActivitiesController.php:268
+msgid "You can not delete what is not yours."
+msgstr ""
+
+#: Controller/TimeTrackerActivitiesController.php:273
+msgid "The time tracker activity has been deleted."
+msgstr ""
+
+#: Controller/TimeTrackerActivitiesController.php:275
+msgid "The time tracker activity could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:39;136;168;216;241
+msgid "Invalid time tracker category"
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:117;143
+msgid "The time tracker category has been saved."
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:120;146
+msgid "The time tracker category could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:178
+msgid "This category is linked with activities. Thank you delete and try again."
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:189
+msgid "The time tracker category to a child element. Thank you to remove it and try again."
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:195
+msgid "The time tracker category has been deleted."
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:197
+msgid "The time tracker category could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:222
+msgid "This time tracker category can not go above"
+msgstr ""
+
+#: Controller/TimeTrackerCategoriesController.php:247
+msgid "This time tracker category can not go lower"
+msgstr ""
+
+#: Controller/TimeTrackerCustomersController.php:38;178;203
+msgid "Invalid time tracker customer"
+msgstr ""
+
+#: Controller/TimeTrackerCustomersController.php:161;182
+msgid "The time tracker customer has been saved."
+msgstr ""
+
+#: Controller/TimeTrackerCustomersController.php:164;185
+msgid "The time tracker customer could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/TimeTrackerCustomersController.php:206
+msgid "The time tracker customer has been deleted."
+msgstr ""
+
+#: Controller/TimeTrackerCustomersController.php:208
+msgid "The time tracker customer could not be deleted. Please, try again."
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:4
+msgid "My Times Trackers Activities"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:8
+msgid "ID"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:9
+#: View/TimeTrackerActivities/export.ctp:42
+#: View/TimeTrackerActivities/view.ctp:9
+#: View/TimeTrackerCategories/view.ctp:51
+#: View/TimeTrackerCustomers/view.ctp:43
+msgid "Date"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:10
+#: View/TimeTrackerActivities/view.ctp:24
+#: View/TimeTrackerCategories/view.ctp:2
+#: View/TimeTrackerCustomers/view.ctp:45
+msgid "Category"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:11
+#: View/TimeTrackerActivities/view.ctp:29
+#: View/TimeTrackerCategories/view.ctp:54
+#: View/TimeTrackerCustomers/view.ctp:46
+msgid "Duration"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:12
+#: View/TimeTrackerActivities/view.ctp:39
+#: View/TimeTrackerCategories/view.ctp:22;55;85
+#: View/TimeTrackerCustomers/view.ctp:16;48
+msgid "Created"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:13
+#: View/TimeTrackerActivities/view.ctp:44
+#: View/TimeTrackerCategories/view.ctp:26;56;86
+#: View/TimeTrackerCustomers/view.ctp:20;49
+msgid "Modified"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:14;56
+#: View/TimeTrackerActivities/edit.ctp:18
+#: View/TimeTrackerActivities/index.ctp:15;60
+#: View/TimeTrackerActivities/view.ctp:52
+#: View/TimeTrackerCategories/add.ctp:14
+#: View/TimeTrackerCategories/edit.ctp:15
+#: View/TimeTrackerCategories/index.ctp:8;28
+#: View/TimeTrackerCategories/view.ctp:33;57;87
+#: View/TimeTrackerCustomers/add.ctp:13
+#: View/TimeTrackerCustomers/edit.ctp:14
+#: View/TimeTrackerCustomers/index.ctp:11;46
+#: View/TimeTrackerCustomers/view.ctp:27;50
+msgid "Actions"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:28
+#: View/TimeTrackerActivities/index.ctp:37
+#: View/TimeTrackerCategories/view.ctp:69;96
+#: View/TimeTrackerCustomers/index.ctp:23
+#: View/TimeTrackerCustomers/view.ctp:63
+msgid "View"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:29
+#: View/TimeTrackerActivities/index.ctp:38
+#: View/TimeTrackerCategories/index.ctp:19
+#: View/TimeTrackerCategories/view.ctp:70;97
+#: View/TimeTrackerCustomers/index.ctp:24
+#: View/TimeTrackerCustomers/view.ctp:64
+msgid "Edit"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:30
+#: View/TimeTrackerActivities/edit.ctp:21
+#: View/TimeTrackerActivities/index.ctp:39
+#: View/TimeTrackerCategories/edit.ctp:18
+#: View/TimeTrackerCategories/index.ctp:20
+#: View/TimeTrackerCategories/view.ctp:71;98
+#: View/TimeTrackerCustomers/edit.ctp:17
+#: View/TimeTrackerCustomers/index.ctp:25
+#: View/TimeTrackerCustomers/view.ctp:65
+msgid "Delete"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:30
+#: View/TimeTrackerActivities/edit.ctp:21
+#: View/TimeTrackerActivities/index.ctp:39
+#: View/TimeTrackerActivities/view.ctp:55
+#: View/TimeTrackerCategories/edit.ctp:18
+#: View/TimeTrackerCategories/index.ctp:20
+#: View/TimeTrackerCategories/view.ctp:36;71;98
+#: View/TimeTrackerCustomers/edit.ctp:17
+#: View/TimeTrackerCustomers/index.ctp:25
+#: View/TimeTrackerCustomers/view.ctp:30;65
+msgid "Are you sure you want to delete # %s?"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:40
+msgid "Add Time Tracker Activity"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:47
+#: View/TimeTrackerActivities/edit.ctp:9
+msgid "Choose a customer"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:48
+#: View/TimeTrackerActivities/edit.ctp:10
+msgid "Choose a category"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:53
+#: View/TimeTrackerActivities/edit.ctp:15
+#: View/TimeTrackerCategories/add.ctp:11
+#: View/TimeTrackerCategories/edit.ctp:12
+#: View/TimeTrackerCustomers/add.ctp:10
+#: View/TimeTrackerCustomers/edit.ctp:11
+msgid "Submit"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:59
+#: View/TimeTrackerActivities/edit.ctp:22
+#: View/TimeTrackerActivities/view.ctp:56
+#: View/TimeTrackerCategories/add.ctp:20
+#: View/TimeTrackerCategories/edit.ctp:22
+#: View/TimeTrackerCategories/index.ctp:33
+#: View/TimeTrackerCustomers/add.ctp:17
+#: View/TimeTrackerCustomers/edit.ctp:19
+#: View/TimeTrackerCustomers/index.ctp:49
+msgid "List Time Tracker Activities"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:60
+#: View/TimeTrackerActivities/edit.ctp:23
+#: View/TimeTrackerActivities/index.ctp:63
+#: View/TimeTrackerActivities/view.ctp:58
+msgid "List Users"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:61
+#: View/TimeTrackerActivities/edit.ctp:24
+#: View/TimeTrackerActivities/index.ctp:64
+#: View/TimeTrackerActivities/view.ctp:59
+msgid "New User"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:62
+#: View/TimeTrackerActivities/edit.ctp:25
+#: View/TimeTrackerActivities/index.ctp:65
+#: View/TimeTrackerActivities/view.ctp:60
+#: View/TimeTrackerCustomers/add.ctp:16
+#: View/TimeTrackerCustomers/edit.ctp:18
+msgid "List Time Tracker Customers"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:63
+#: View/TimeTrackerActivities/edit.ctp:26
+#: View/TimeTrackerActivities/index.ctp:66
+#: View/TimeTrackerActivities/view.ctp:61
+#: View/TimeTrackerCustomers/index.ctp:48
+msgid "New Time Tracker Customer"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:64
+#: View/TimeTrackerActivities/edit.ctp:27
+#: View/TimeTrackerActivities/index.ctp:67
+#: View/TimeTrackerActivities/view.ctp:62
+#: View/TimeTrackerCategories/add.ctp:17;18
+#: View/TimeTrackerCategories/edit.ctp:19;20
+#: View/TimeTrackerCategories/index.ctp:31
+msgid "List Time Tracker Categories"
+msgstr ""
+
+#: View/TimeTrackerActivities/add.ctp:65
+#: View/TimeTrackerActivities/edit.ctp:28
+#: View/TimeTrackerActivities/index.ctp:68
+#: View/TimeTrackerActivities/view.ctp:63
+#: View/TimeTrackerCategories/index.ctp:30
+msgid "New Time Tracker Category"
+msgstr ""
+
+#: View/TimeTrackerActivities/edit.ctp:4
+#: View/TimeTrackerActivities/view.ctp:54
+msgid "Edit Time Tracker Activity"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:43
+msgid "Utilisateur"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:44
+msgid "Client"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:45
+msgid "Catégorie"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:46
+msgid "Durée"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:60
+msgid "Statistiques de course par arrêt"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:68
+msgid "Exploitant"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:69
+msgid "Service"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:70
+msgid "Capacité"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:77
+msgid "Cette course à été effectuée avec des cars de différente capacité : %s "
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:81
+msgid "Moyenne sur la période du"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:82
+msgid "Jusqu'au"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:90
+msgid "Point d'arrêt"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:140
+msgid "Totaux"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:162
+msgid "Places disponibles min :"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:171
+msgid "Taux de remplissage :"
+msgstr ""
+
+#: View/TimeTrackerActivities/export.ctp:181
+msgid "Taux d'usage :"
+msgstr ""
+
+#: View/TimeTrackerActivities/index.ctp:2
+msgid "Time Tracker Activities"
+msgstr ""
+
+#: View/TimeTrackerActivities/index.ctp:48
+#: View/TimeTrackerCustomers/index.ctp:34
+msgid "Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}"
+msgstr ""
+
+#: View/TimeTrackerActivities/index.ctp:53
+#: View/TimeTrackerCustomers/index.ctp:39
+msgid "previous"
+msgstr ""
+
+#: View/TimeTrackerActivities/index.ctp:55
+#: View/TimeTrackerCustomers/index.ctp:41
+msgid "next"
+msgstr ""
+
+#: View/TimeTrackerActivities/index.ctp:62
+#: View/TimeTrackerActivities/view.ctp:57
+#: View/TimeTrackerCategories/add.ctp:21
+#: View/TimeTrackerCategories/edit.ctp:23
+#: View/TimeTrackerCategories/index.ctp:34
+#: View/TimeTrackerCustomers/add.ctp:18
+#: View/TimeTrackerCustomers/edit.ctp:20
+#: View/TimeTrackerCustomers/index.ctp:50
+msgid "New Time Tracker Activity"
+msgstr ""
+
+#: View/TimeTrackerActivities/view.ctp:2
+msgid "Time Tracker Activity"
+msgstr ""
+
+#: View/TimeTrackerActivities/view.ctp:4
+#: View/TimeTrackerCategories/view.ctp:4;50;83
+#: View/TimeTrackerCustomers/view.ctp:4;42
+msgid "Id"
+msgstr ""
+
+#: View/TimeTrackerActivities/view.ctp:14
+#: View/TimeTrackerCategories/view.ctp:52
+#: View/TimeTrackerCustomers/view.ctp:44;94
+msgid "User"
+msgstr ""
+
+#: View/TimeTrackerActivities/view.ctp:19
+#: View/TimeTrackerCategories/view.ctp:53
+#: View/TimeTrackerCustomers/view.ctp:2
+msgid "Customer"
+msgstr ""
+
+#: View/TimeTrackerActivities/view.ctp:34
+#: View/TimeTrackerCategories/view.ctp:12
+#: View/TimeTrackerCustomers/view.ctp:12;47
+msgid "Comment"
+msgstr ""
+
+#: View/TimeTrackerActivities/view.ctp:55
+msgid "Delete Time Tracker Activity"
+msgstr ""
+
+#: View/TimeTrackerCategories/add.ctp:4
+msgid "Add Time Tracker Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/add.ctp:7
+#: View/TimeTrackerCategories/edit.ctp:8
+msgid "Choice"
+msgstr ""
+
+#: View/TimeTrackerCategories/add.ctp:19
+#: View/TimeTrackerCategories/edit.ctp:21
+#: View/TimeTrackerCategories/index.ctp:32
+msgid "New Parent Time Tracker Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/edit.ctp:4
+msgid "Edit Time Tracker Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/index.ctp:2
+msgid "Time Tracker Categories"
+msgstr ""
+
+#: View/TimeTrackerCategories/index.ctp:6
+msgid "id"
+msgstr ""
+
+#: View/TimeTrackerCategories/index.ctp:7
+msgid "name"
+msgstr ""
+
+#: View/TimeTrackerCategories/index.ctp:17
+msgid "Move Up"
+msgstr ""
+
+#: View/TimeTrackerCategories/index.ctp:18
+msgid "Move Down"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:8;84
+#: View/TimeTrackerCustomers/view.ctp:8
+msgid "Name"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:17
+msgid "Parent Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:35
+msgid "Edit Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:36
+msgid "Delete Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:37;39
+msgid "List Categories"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:38
+msgid "New Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:40
+msgid "New Parent Category"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:41
+#: View/TimeTrackerCustomers/view.ctp:33
+msgid "List Activities"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:42
+#: View/TimeTrackerCustomers/view.ctp:34
+msgid "New Activity"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:46
+#: View/TimeTrackerCustomers/view.ctp:38
+msgid "Related Activities"
+msgstr ""
+
+#: View/TimeTrackerCategories/view.ctp:79
+msgid "Related Categories Child"
+msgstr ""
+
+#: View/TimeTrackerCustomers/add.ctp:4
+msgid "Add Time Tracker Customer"
+msgstr ""
+
+#: View/TimeTrackerCustomers/edit.ctp:4
+msgid "Edit Time Tracker Customer"
+msgstr ""
+
+#: View/TimeTrackerCustomers/index.ctp:2
+msgid "Time Tracker Customers"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:29
+msgid "Edit Customer"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:30
+msgid "Delete Customer"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:31
+msgid "List Customers"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:32
+msgid "New Customer"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:73
+msgid "Number of hours worked per day"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:77
+msgid "Day"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:78;95;112
+msgid "Number of hours worked"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:90
+msgid "Number of hours worked per user"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:107
+msgid "Number of hours worked per category"
+msgstr ""
+
+#: View/TimeTrackerCustomers/view.ctp:111
+msgid "Catégory"
+msgstr ""
+
+#: Model/TimeTrackerActivity.php:validation for field date
+msgid "Thank you to enter a date."
+msgstr ""
+
+#: Model/TimeTrackerActivity.php:validation for field duration
+msgid "Thank you to enter a duration."
+msgstr ""
+
+#: Model/TimeTrackerCategory.php:validation for field name
+#: Model/TimeTrackerCustomer.php:validation for field name
+msgid "Thank you to enter a name."
+msgstr ""
+

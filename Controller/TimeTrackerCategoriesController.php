@@ -43,11 +43,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $timeTrackerCategory = $this->TimeTrackerCategory->find('first', array(
             'conditions' => array(
                 'TimeTrackerCategory.' . $this->TimeTrackerCategory->primaryKey => $id
-            ),
-            'contain' => array(
-                'ParentTimeTrackerCategory',
-                'timeTrackerCategoryChild'
-            ),
+            )
         ));
 
         $timeTrackerCategoryChildren = $this->TimeTrackerCategory->children($id);
@@ -97,15 +93,6 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
                 'foreignKey' => false,
                 'conditions' => array(
                     'TimeTrackerActivity.time_tracker_customer_id = TimeTrackerCustomer.id',
-                ),
-            ),
-            array(
-                'table' => 'time_tracker_categories',
-                'alias' => 'TimeTrackerCategory ',
-                'type' => 'inner',
-                'foreignKey' => false,
-                'conditions' => array(
-                    'TimeTrackerCategory.parent_id = TimeTrackerCategory .id',
                 ),
             ),
 
@@ -232,7 +219,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $this->TimeTrackerCategory->id = $id;
 
         if(($this->TimeTrackerCategory->moveUp($id, abs($delta))) == false) {
-            $this->Session->setFlash(__('This time tracker category can not go above'), 'flash', array('type' => 'error'));
+            $this->Session->setFlash(__('This time tracker category can not go above'));
         }
         $this->redirect(array('action' => 'index'));
     }
@@ -257,7 +244,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $this->TimeTrackerCategory->id = $id;
 
         if($this->TimeTrackerCategory->moveDown($id, abs($delta)) == false) {
-            $this->Session->setFlash(__('This time tracker category can not go lower'), 'flash', array('type' => 'error'));
+            $this->Session->setFlash(__('This time tracker category can not go lower'));
         }
         $this->redirect(array('action' => 'index'));
     }

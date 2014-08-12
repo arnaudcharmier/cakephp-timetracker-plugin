@@ -13,10 +13,12 @@
 		<dd>
 			<?php echo h($timeTrackerCategory['TimeTrackerCategory']['comment']); ?>
 		</dd>
-		<dt><?php echo __('Parent Category'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($timeTrackerCategory['ParentTimeTrackerCategory']['name'], array('controller' => 'time_tracker_categories', 'action' => 'view', $timeTrackerCategory['ParentTimeTrackerCategory']['id'])); ?>
-		</dd>
+		<?php if(isset($timeTrackerCategory['ParentTimeTrackerCategory']['name'])) { ?>
+			<dt><?php echo __('Parent Category'); ?></dt>
+			<dd>
+				<?php echo $this->Html->link($timeTrackerCategory['ParentTimeTrackerCategory']['name'], array('controller' => 'time_tracker_categories', 'action' => 'view', $timeTrackerCategory['ParentTimeTrackerCategory']['id'])); ?>
+			</dd>
+		<?php } ?>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($timeTrackerCategory['TimeTrackerCategory']['created']); ?>
