@@ -17,7 +17,7 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
     public $validate = array(
         'date' => array(
             'date' => array(
-                'rule' => array('date'),
+                'rule' => array('date', 'ymd'),
                 'message' => 'Thank you to enter a date.',
                 'allowEmpty' => false,
                 'required' => true,

@@ -160,8 +160,11 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             $timeLeft    = TimeUtil::subtractionTime(Configure::read('hoursInWorkDay'), $durationAll);
 
             // Prepare array
-            //$dataToSave['TimeTrackerActivity']['date']     = date('Y/m/d', strtotime(str_replace('/', '-', $dataToSave['TimeTrackerActivity']['date'])));
             $dataToSave['TimeTrackerActivity']['user_id']  = $this->Auth->user('id');
+            if(!is_array($dataToSave['TimeTrackerActivity']['date'])){
+                $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
+            }
+
             if($dataToSave['TimeTrackerActivity']['duration'] > $timeLeft) {
                 $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
                 return $this->redirect($this->referer());
@@ -178,7 +181,6 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             $timeTrackerCategories = $this->TimeTrackerActivity->TimeTrackerCategory->generateTreeList(null, null, null, '　');
             $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories'));
         }
-
 
         $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories', 'activitiesUserByDate', 'dateFilter', 'totalTimeWorked'));
     }
@@ -205,6 +207,9 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
 
             $dataToSave = $this->request->data;
             $dataToSave['TimeTrackerActivity']['user_id'] = $this->Auth->user('id');
+            if(!is_array($dataToSave['TimeTrackerActivity']['date'])){
+                $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
+            }
 
             // Recovery time remaining for this date
             $durationAll = $this->TimeTrackerActivity->durationToDayByUser($date, $this->Auth->user('id'));
@@ -214,6 +219,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
                 $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
                 return $this->redirect($this->referer());
             }
+
 
             $this->TimeTrackerActivity->create();
             if ($this->TimeTrackerActivity->save($dataToSave)) {
@@ -229,9 +235,11 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
                 $this->request->data['TimeTrackerActivity']['date'] = $this->request->data['TimeTrackerActivity']['date_humanized'];
             }
         }
+
         $users = $this->TimeTrackerActivity->User->find('list');
         $timeTrackerCustomers = $this->TimeTrackerActivity->TimeTrackerCustomer->find('list');
         $timeTrackerCategories = $this->TimeTrackerActivity->TimeTrackerCategory->generateTreeList(null, null, null, '　');
+
         $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories'));
     }
 

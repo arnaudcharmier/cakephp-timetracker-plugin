@@ -18,7 +18,7 @@
             <?php foreach ($activitiesUserByDate as $activityUserByDate): ?>
                 <tr>
                     <td><?php echo h($activityUserByDate['TimeTrackerActivity']['id']); ?>&nbsp;</td>
-                    <td><?php echo h($activityUserByDate['TimeTrackerActivity']['date']); ?>&nbsp;</td>
+                    <td><?php echo h($activityUserByDate['TimeTrackerActivity']['date'], array('type' => 'date', 'dateFormat' => 'Ymd')); ?>&nbsp;</td>
                     <td><?php echo $this->Html->link($activityUserByDate['TimeTrackerCategory']['name'],
                     array('controller' => 'time_tracker_categories', 'action' => 'view', $activityUserByDate['TimeTrackerCategory']['id'])); ?></td>
                     <td><?php echo h($activityUserByDate['TimeTrackerActivity']['duration']); ?>&nbsp;</td>
