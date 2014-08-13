@@ -31,6 +31,22 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
                 'required' => true,
             ),
         ),
+        'time_tracker_customer_id' => array(
+            'notEmpty' => array(
+                'rule' => array('notEmpty'),
+                'message' =>  'Thank you to enter a customer.',
+                'allowEmpty' => false,
+                'required' => true,
+            ),
+        ),
+        'time_tracker_category_id' => array(
+            'notEmpty' => array(
+                'rule' => array('notEmpty'),
+                'message' =>  'Thank you to enter a category.',
+                'allowEmpty' => false,
+                'required' => true,
+            ),
+        ),
     );
 
     public $findMethods = array('hoursWorkedPerDay' =>  true, 'hoursWorkedPerUser' => true, 'hoursWorkedPerCategory' =>  true);
@@ -75,10 +91,10 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
                     $resultats[$clef][$this->alias]['date_humanized'] = CakeTime::format('d/m/Y', $val[$this->alias]['date']);
                 }
                 if (isset($val[$this->alias]['created'])) {
-                    $resultats[$clef][$this->alias]['created_humanized'] = CakeTime::format('d/m/Y h:i:s', $val[$this->alias]['created']);
+                    $resultats[$clef][$this->alias]['created_humanized'] = CakeTime::format('d/m/Y H:i:s', $val[$this->alias]['created']);
                 }
                 if (isset($val[$this->alias]['modified'])) {
-                    $resultats[$clef][$this->alias]['modified_humanized'] = CakeTime::format('d/m/Y h:i:s', $val[$this->alias]['modified']);
+                    $resultats[$clef][$this->alias]['modified_humanized'] = CakeTime::format('d/m/Y H:i:s', $val[$this->alias]['modified']);
                 }
             }
         }

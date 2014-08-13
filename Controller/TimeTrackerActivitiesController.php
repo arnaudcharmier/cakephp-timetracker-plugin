@@ -106,7 +106,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
  *
  * @return void
  */
-    public function add($date = null) {
+    public function add($date = null, $customer_id = null) {
 
         // Recovery activities that date
         $activitiesUserByDate = array();
@@ -190,7 +190,10 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         }
         $timeTrackerCustomers = $this->TimeTrackerActivity->TimeTrackerCustomer->find('list');
         $timeTrackerCategories = $this->TimeTrackerActivity->TimeTrackerCategory->generateTreeList(null, null, null, '　');
-        $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories'));
+        if(isset($customer_id)) {
+            $data['TimeTrackerActivity']['time_tracker_customer_id'] = $customer_id;
+            $this->data = $data;
+        }
 
         $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories', 'activitiesUserByDate', 'dateFilter', 'totalTimeWorked'));
     }
@@ -213,6 +216,48 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             $this->data = $dataToSave;
             $this->Session->setFlash(__('You can not change what he does not belong to you.'), 'flash', array('type' => 'error'));
             return $this->redirect($this->referer());
+        }
+
+        $totalTimeWorked = '00:00:00';
+
+        if(!empty($date)){
+            $conditions = array(
+                'TimeTrackerActivity.date'    => $date,
+                'TimeTrackerActivity.user_id' => $this->Auth->user('id'),
+            );
+            $order  = array('TimeTrackerActivity.date ASC');
+            $fields = array(
+                'TimeTrackerActivity.id',
+                'TimeTrackerActivity.date',
+                'TimeTrackerActivity.duration',
+                'TimeTrackerActivity.comment',
+                'TimeTrackerActivity.created',
+                'TimeTrackerActivity.modified',
+                'TimeTrackerCategory.id',
+                'TimeTrackerCategory.name',
+            );
+
+            $joins  = array(
+                array(
+                    'table' => 'time_tracker_categories',
+                    'alias' => 'TimeTrackerCategory',
+                    'type' => 'inner',
+                    'foreignKey' => false,
+                    'conditions' => array(
+                        'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
+                    ),
+                ),
+            );
+            $activitiesUserByDate = $this->TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'joins' => $joins, 'fields' => $fields));
+
+            // Calculating total time worked
+            foreach ($activitiesUserByDate as $activityUserByDate) {
+                $totalTimeWorked = TimeUtil::additionTime($totalTimeWorked, $activityUserByDate['TimeTrackerActivity']['duration']);
+            }
+
+            $dateFilter = $date;
+
+
         }
 
         if ($this->request->is(array('post', 'put'))) {
@@ -253,7 +298,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         $timeTrackerCustomers = $this->TimeTrackerActivity->TimeTrackerCustomer->find('list');
         $timeTrackerCategories = $this->TimeTrackerActivity->TimeTrackerCategory->generateTreeList(null, null, null, '　');
 
-        $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories'));
+        $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories', 'totalTimeWorked'));
     }
 
 /**

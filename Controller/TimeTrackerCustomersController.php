@@ -44,7 +44,7 @@ class TimeTrackerCustomersController extends TimeTrackerAppController {
             'TimeTrackerActivity.time_tracker_customer_id' => $id
 
         );
-        $order  = array('TimeTrackerActivity.date ASC');
+        $order  = array('TimeTrackerActivity.date ASC', 'TimeTrackerActivity.duration ASC');
         $fields = array(
             'TimeTrackerActivity.id',
             'TimeTrackerActivity.date',

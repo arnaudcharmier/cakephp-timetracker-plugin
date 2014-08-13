@@ -7,5 +7,6 @@ class TimeTrackerHelper extends AppHelper {
         $timeArray  = explode(':', $time);
         $timePerc   = 100 * $timeArray['0'] / $timeTotal;
 
-        return $timePerc . '%';
+        return $timePerc . ' %';
     }
+}

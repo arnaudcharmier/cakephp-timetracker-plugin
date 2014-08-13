@@ -108,7 +108,7 @@
 	<?php if (!empty($activitiesCustomerByCategory)): ?>
 		<table cellpadding = "0" cellspacing = "0">
 		<tr>
-			<th><?php echo __('Catégory'); ?></th>
+			<th><?php echo __('Category'); ?></th>
 			<th><?php echo __('Number of hours worked'); ?></th>
 		</tr>
 		<?php foreach ($activitiesCustomerByCategory as $cat => $number): ?>

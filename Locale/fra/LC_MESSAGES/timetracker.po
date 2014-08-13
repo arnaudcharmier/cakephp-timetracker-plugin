@@ -4,15 +4,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TimeTracker\n"
-"POT-Creation-Date: 2014-08-13 15:47+0100\n"
-"PO-Revision-Date: 2014-08-13 15:48+0100\n"
+"POT-Creation-Date: 2014-08-13 18:19+0100\n"
+"PO-Revision-Date: 2014-08-13 18:24+0100\n"
 "Last-Translator: Arnaud Charmier <a.charmier@ubitransports.com>\n"
 "Language-Team: Arnaud Charmier <a.charmier@ubitransports.com>\n"
 "Language: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n>2;\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
 "X-Generator: Poedit 1.5.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __\n"
@@ -38,8 +38,7 @@ msgstr "Le client n'a pas été enregistré."
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCustomersController.php:213
 msgid ""
 "This customer is linked with activities. Thank you delete and try again."
-msgstr ""
-"Ce client est lié avec des activités. S'il vous plaît, essayez à nouveau."
+msgstr "Ce client est lié avec des activités. Merci de recommencer."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCustomersController.php:218
 msgid "The time tracker customer has been deleted."
@@ -47,7 +46,7 @@ msgstr "Le client a bien été supprimé."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCustomersController.php:220
 msgid "The time tracker customer could not be deleted. Please, try again."
-msgstr "Le client n'a pas été supprimé. S'il vous plaît, essayez à nouveau."
+msgstr "Le client n'a pas été supprimé. Merci de recommencer."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:39
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:136
@@ -65,22 +64,18 @@ msgstr "La catégorie a bien été enregistré."
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:120
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:146
 msgid "The time tracker category could not be saved. Please, try again."
-msgstr ""
-"La catégorien'a pas pu être enregistré. S'il vous plaît, essayez à nouveau."
+msgstr "La catégorien'a pas pu être enregistré. Merci de recommencer."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:178
 msgid ""
 "This category is linked with activities. Thank you delete and try again."
-msgstr ""
-"Cette catégorie est lié avec des activités. S'il vous plaît, essayez à "
-"nouveau."
+msgstr "Cette catégorie est lié avec des activités. Merci de recommencer."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:189
 msgid ""
 "The time tracker category to a child element. Thank you to remove it and try "
 "again."
-msgstr ""
-"La catégorie a des éléments enfants. S'il vous plaît, essayez à nouveau."
+msgstr "La catégorie a des éléments enfants. Merci de recommencer."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:195
 msgid "The time tracker category has been deleted."
@@ -88,7 +83,7 @@ msgstr "La catégorie a bien été supprimé"
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:197
 msgid "The time tracker category could not be deleted. Please, try again."
-msgstr "La catégorie n'a pas été supprimé. S'il vous plaît, essayez à nouveau."
+msgstr "La catégorie n'a pas été supprimé. Merci de recommencer."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerCategoriesController.php:222
 msgid "This time tracker category can not go above"
@@ -99,47 +94,45 @@ msgid "This time tracker category can not go lower"
 msgstr "La catégorie ne peut pas être montée plus bas."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:43
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:207
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:269
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:209
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:271
 msgid "Invalid time tracker activity"
 msgstr "L'activité n'est pas reconnu"
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:176
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:231
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:233
 msgid ""
 "The seizure duration is greater than the time remaining on that date. "
 "Please, try again."
 msgstr ""
-"La durée de prise est plus grand que le temps qui reste à cette date. S'il "
-"vous plaît, essayez à nouveau."
+"La durée de l'activité est plus grand que le temps qui reste à cette date. "
+"Merci de recommencer."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:181
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:236
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:238
 msgid "The time tracker activity has been saved."
 msgstr "L'activité a bien été enregistré."
 
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:186
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:241
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:243
 msgid "The time tracker activity could not be saved. Please, try again."
-msgstr ""
-"L'activité n'a pas pu être enregistré. S'il vous plaît, essayez à nouveau."
+msgstr "L'activité n'a pas pu être enregistré. Merci de recommencer."
 
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:214
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:216
 msgid "You can not change what he does not belong to you."
 msgstr "Vous ne pouvez pas changer ce qu'il ne vous appartient pas."
 
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:274
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:276
 msgid "You can not delete what is not yours."
 msgstr "Vous ne pouvez pas supprimer ce qu'il ne vous appartient pas."
 
-#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:279
-msgid "The time tracker activity has been deleted."
-msgstr "L'activité da été supprimée."
-
 #: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:281
+msgid "The time tracker activity has been deleted."
+msgstr "L'activité a été supprimée."
+
+#: /var/www/sites/dev/app/Plugin/TimeTracker/Controller/TimeTrackerActivitiesController.php:283
 msgid "The time tracker activity could not be deleted. Please, try again."
-msgstr ""
-"L'activité ne peut pas être supprimer. S'il vous plaît, essayez à nouveau."
+msgstr "L'activité ne peut pas être supprimer. Merci de recommencer."
 
 #~ msgid "My Times Trackers Activities"
 #~ msgstr "Mes heures travaillées"
