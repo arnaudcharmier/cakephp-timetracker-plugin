@@ -114,10 +114,10 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         if ($this->request->is('post')) {
             $this->TimeTrackerCategory->create();
             if ($this->TimeTrackerCategory->save($dataToSave)) {
-                $this->Session->setFlash(__('The time tracker category has been saved.'));
+                $this->Session->setFlash(__('The time tracker category has been saved.'), 'flash', array('type' => 'success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The time tracker category could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The time tracker category could not be saved. Please, try again.'), 'flash', array('type' => 'error'));
             }
         }
         $parentTimeTrackerCategories = $this->TimeTrackerCategory->ParentTimeTrackerCategory->generateTreeList(null, null, null, '　');
@@ -140,10 +140,10 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
 
         if ($this->request->is(array('post', 'put'))) {
             if ($this->TimeTrackerCategory->save($dataToSave)) {
-                $this->Session->setFlash(__('The time tracker category has been saved.'));
+                $this->Session->setFlash(__('The time tracker category has been saved.'), 'flash', array('type' => 'success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The time tracker category could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The time tracker category could not be saved. Please, try again.'), 'flash', array('type' => 'error'));
             }
         } else {
             $options = array('conditions' => array('TimeTrackerCategory.' . $this->TimeTrackerCategory->primaryKey => $id));
@@ -175,7 +175,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
 
         // Presence of related activity
         if($activitiesCategory > 0){
-            $this->Session->setFlash(__('This category is linked with activities. Thank you delete and try again.'));
+            $this->Session->setFlash(__('This category is linked with activities. Thank you delete and try again.'), 'flash', array('type' => 'error'));
             return $this->redirect($this->referer());
         }
 
@@ -186,15 +186,15 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
 
         // Presence of child element
         if(count($children) != 0){
-            $this->Session->setFlash(__('The time tracker category to a child element. Thank you to remove it and try again.'));
+            $this->Session->setFlash(__('The time tracker category to a child element. Thank you to remove it and try again.'), 'flash', array('type' => 'error'));
             return $this->redirect($this->referer());
         }
 
 
         if ($this->TimeTrackerCategory->removeFromTree($id, true)) {
-            $this->Session->setFlash(__('The time tracker category has been deleted.'));
+            $this->Session->setFlash(__('The time tracker category has been deleted.'), 'flash', array('type' => 'success'));
         } else {
-            $this->Session->setFlash(__('The time tracker category could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('The time tracker category could not be deleted. Please, try again.'), 'flash', array('type' => 'error'));
         }
         return $this->redirect(array('action' => 'index'));
     }
@@ -219,7 +219,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $this->TimeTrackerCategory->id = $id;
 
         if(($this->TimeTrackerCategory->moveUp($id, abs($delta))) == false) {
-            $this->Session->setFlash(__('This time tracker category can not go above'));
+            $this->Session->setFlash(__('This time tracker category can not go above'), 'flash', array('type' => 'error'));
         }
         $this->redirect(array('action' => 'index'));
     }
@@ -244,7 +244,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $this->TimeTrackerCategory->id = $id;
 
         if($this->TimeTrackerCategory->moveDown($id, abs($delta)) == false) {
-            $this->Session->setFlash(__('This time tracker category can not go lower'));
+            $this->Session->setFlash(__('This time tracker category can not go lower'), 'flash', array('type' => 'error'));
         }
         $this->redirect(array('action' => 'index'));
     }

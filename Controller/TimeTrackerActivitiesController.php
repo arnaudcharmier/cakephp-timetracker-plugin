@@ -173,17 +173,17 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
                 $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
             }
             if($dataToSave['TimeTrackerActivity']['duration'] > $timeLeft) {
-                $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
+                $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'), 'flash', array('type' => 'error'));
                 $this->data = $dataToSave;
             } else {
                 $this->TimeTrackerActivity->create();
                 if ($this->TimeTrackerActivity->save($dataToSave)) {
-                    $this->Session->setFlash(__('The time tracker activity has been saved.'));
+                    $this->Session->setFlash(__('The time tracker activity has been saved.'), 'flash', array('type' => 'success'));
                     return $this->redirect(array('action' => 'index'));
                 } else {
                     $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
                     $this->data = $dataToSave;
-                    $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'), 'flash', array('type' => 'error'));
                 }
             }
 
@@ -211,7 +211,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
 
         if($this->Auth->user('id') != $timeTrackerActivity['TimeTrackerActivity']['user_id']){
             $this->data = $dataToSave;
-            $this->Session->setFlash(__('You can not change what he does not belong to you.'));
+            $this->Session->setFlash(__('You can not change what he does not belong to you.'), 'flash', array('type' => 'error'));
             return $this->redirect($this->referer());
         }
 
@@ -228,17 +228,17 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             $timeLeft    = TimeUtil::subtractionTime(Configure::read('hoursInWorkDay'), $durationAll);
 
             if($dataToSave['TimeTrackerActivity']['duration'] > $timeLeft) {
-                $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
+                $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'), 'flash', array('type' => 'error'));
                 $this->data = $dataToSave;
             } else {
                 $this->TimeTrackerActivity->create();
                 if ($this->TimeTrackerActivity->save($dataToSave)) {
-                    $this->Session->setFlash(__('The time tracker activity has been saved.'));
+                    $this->Session->setFlash(__('The time tracker activity has been saved.'), 'flash', array('type' => 'success'));
                     return $this->redirect(array('action' => 'index'));
                 } else {
                     $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
                     $this->data = $dataToSave;
-                    $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'));
+                    $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'), 'flash', array('type' => 'error'));
                 }
             }
         } else {
@@ -271,14 +271,14 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
 
         $timeTrackerActivity = $this->TimeTrackerActivity->findById($id, array('fields' => 'user_id'));
         if($this->Auth->user('id') != $timeTrackerActivity['TimeTrackerActivity']['user_id']){
-            $this->Session->setFlash(__('You can not delete what is not yours.'));
+            $this->Session->setFlash(__('You can not delete what is not yours.'), 'flash', array('type' => 'error'));
             return $this->redirect($this->referer());
         }
 
         if ($this->TimeTrackerActivity->delete()) {
-            $this->Session->setFlash(__('The time tracker activity has been deleted.'));
+            $this->Session->setFlash(__('The time tracker activity has been deleted.'), 'flash', array('type' => 'success'));
         } else {
-            $this->Session->setFlash(__('The time tracker activity could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('The time tracker activity could not be deleted. Please, try again.'), 'flash', array('type' => 'error'));
         }
         return $this->redirect($this->referer());
     }

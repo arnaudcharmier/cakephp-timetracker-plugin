@@ -158,10 +158,10 @@ class TimeTrackerCustomersController extends TimeTrackerAppController {
         if ($this->request->is('post')) {
             $this->TimeTrackerCustomer->create();
             if ($this->TimeTrackerCustomer->save($this->request->data)) {
-                $this->Session->setFlash(__('The time tracker customer has been saved.'));
+                $this->Session->setFlash(__('The time tracker customer has been saved.'), 'flash', array('type' => 'success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The time tracker customer could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The time tracker customer could not be saved. Please, try again.'), 'flash', array('type' => 'error'));
             }
         }
     }
@@ -179,10 +179,10 @@ class TimeTrackerCustomersController extends TimeTrackerAppController {
         }
         if ($this->request->is(array('post', 'put'))) {
             if ($this->TimeTrackerCustomer->save($this->request->data)) {
-                $this->Session->setFlash(__('The time tracker customer has been saved.'));
+                $this->Session->setFlash(__('The time tracker customer has been saved.'), 'flash', array('type' => 'success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('The time tracker customer could not be saved. Please, try again.'));
+                $this->Session->setFlash(__('The time tracker customer could not be saved. Please, try again.'), 'flash', array('type' => 'error'));
             }
         } else {
             $options = array('conditions' => array('TimeTrackerCustomer.' . $this->TimeTrackerCustomer->primaryKey => $id));
@@ -210,14 +210,14 @@ class TimeTrackerCustomersController extends TimeTrackerAppController {
 
         // Presence of related activity
         if($activitiesCategory > 0){
-            $this->Session->setFlash(__('This customer is linked with activities. Thank you delete and try again.'));
+            $this->Session->setFlash(__('This customer is linked with activities. Thank you delete and try again.'), 'flash', array('type' => 'error'));
             return $this->redirect($this->referer());
         }
 
         if ($this->TimeTrackerCustomer->delete()) {
-            $this->Session->setFlash(__('The time tracker customer has been deleted.'));
+            $this->Session->setFlash(__('The time tracker customer has been deleted.'), 'flash', array('type' => 'success'));
         } else {
-            $this->Session->setFlash(__('The time tracker customer could not be deleted. Please, try again.'));
+            $this->Session->setFlash(__('The time tracker customer could not be deleted. Please, try again.'), 'flash', array('type' => 'error'));
         }
         return $this->redirect(array('action' => 'index'));
     }
