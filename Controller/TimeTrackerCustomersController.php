@@ -202,6 +202,18 @@ class TimeTrackerCustomersController extends TimeTrackerAppController {
         if (!$this->TimeTrackerCustomer->exists()) {
             throw new NotFoundException(__('Invalid time tracker customer'));
         }
+
+        // Find related activity
+        $activitiesCategory = $this->TimeTrackerCustomer->TimeTrackerActivity->find('count', array(
+            'conditions' => array('TimeTrackerActivity.time_tracker_customer_id' => $id)
+        ));
+
+        // Presence of related activity
+        if($activitiesCategory > 0){
+            $this->Session->setFlash(__('This customer is linked with activities. Thank you delete and try again.'));
+            return $this->redirect($this->referer());
+        }
+
         if ($this->TimeTrackerCustomer->delete()) {
             $this->Session->setFlash(__('The time tracker customer has been deleted.'));
         } else {

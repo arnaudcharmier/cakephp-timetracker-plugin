@@ -18,11 +18,11 @@
             <?php foreach ($activitiesUserByDate as $activityUserByDate): ?>
                 <tr>
                     <td><?php echo h($activityUserByDate['TimeTrackerActivity']['id']); ?>&nbsp;</td>
-                    <td><?php echo h($activityUserByDate['TimeTrackerActivity']['date'], array('type' => 'date', 'dateFormat' => 'Ymd')); ?>&nbsp;</td>
+                    <td><?php echo h($activityUserByDate['TimeTrackerActivity']['date']); ?>&nbsp;</td>
                     <td><?php echo $this->Html->link($activityUserByDate['TimeTrackerCategory']['name'],
                     array('controller' => 'time_tracker_categories', 'action' => 'view', $activityUserByDate['TimeTrackerCategory']['id'])); ?></td>
                     <td><?php echo h($activityUserByDate['TimeTrackerActivity']['duration']); ?>&nbsp;</td>
-                    <td class="hidden-phone hidden-tablet"><?php echo h($activityUserByDate['TimeTrackerActivity']['created_humanized']); ?>&nbsp;</td>
+                    <td class="hidden-phone hidden-tablet"><?php echo h($activityUserByDate['TimeTrackerActivity']['created']); ?>&nbsp;</td>
                     <td class="hidden-phone hidden-tablet"><?php echo h($activityUserByDate['TimeTrackerActivity']['modified_humanized']); ?>&nbsp;</td>
                     <td class="text-center">
                         <?php echo $this->Html->link(__('View'), array('action' => 'view', $activityUserByDate['TimeTrackerActivity']['id'])); ?>
@@ -42,7 +42,7 @@
         if(!empty($dateFilter)){
             echo $this->Form->input('date', array('type' => 'hidden', 'value' => $dateFilter));
         } else {
-            echo $this->Form->input('date');
+            echo $this->Form->input('date', array('type' => 'text', 'placeholder' => '0000-00-00'));
         }
         echo $this->Form->input('time_tracker_customer_id', array('label' => 'Customer', 'empty' => __('Choose a customer')));
         echo $this->Form->input('time_tracker_category_id', array('label' => 'Category', 'empty' => __('Choose a category')));

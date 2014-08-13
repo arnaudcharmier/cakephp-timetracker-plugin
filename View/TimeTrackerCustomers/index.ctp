@@ -13,25 +13,25 @@
 	</thead>
 	<tbody>
 	<?php foreach ($timeTrackerCustomers as $timeTrackerCustomer): ?>
-	<tr>
-		<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['id']); ?>&nbsp;</td>
-		<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['name']); ?>&nbsp;</td>
-		<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['comment']); ?>&nbsp;</td>
-		<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['created']); ?>&nbsp;</td>
-		<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['modified']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $timeTrackerCustomer['TimeTrackerCustomer']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $timeTrackerCustomer['TimeTrackerCustomer']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $timeTrackerCustomer['TimeTrackerCustomer']['id']), array(), __('Are you sure you want to delete # %s?', $timeTrackerCustomer['TimeTrackerCustomer']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
+		<tr>
+			<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['id']); ?>&nbsp;</td>
+			<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['name']); ?>&nbsp;</td>
+			<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['comment']); ?>&nbsp;</td>
+			<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['created']); ?>&nbsp;</td>
+			<td><?php echo h($timeTrackerCustomer['TimeTrackerCustomer']['modified']); ?>&nbsp;</td>
+			<td class="actions">
+				<?php echo $this->Html->link(__('View'), array('action' => 'view', $timeTrackerCustomer['TimeTrackerCustomer']['id'])); ?>
+				<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $timeTrackerCustomer['TimeTrackerCustomer']['id'])); ?>
+				<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $timeTrackerCustomer['TimeTrackerCustomer']['id']), array(), __('Are you sure you want to delete ' . $timeTrackerCustomer['TimeTrackerCustomer']['name'] . '?', $timeTrackerCustomer['TimeTrackerCustomer']['id'])); ?>
+			</td>
+		</tr>
+	<?php endforeach; ?>
 	</tbody>
 	</table>
 	<p>
 	<?php
 	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
+		'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 	));
 	?>	</p>
 	<div class="paging">

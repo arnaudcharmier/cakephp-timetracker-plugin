@@ -27,8 +27,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
  * @return void
  */
     public function index() {
-        $this->TimeTrackerActivity->recursive = -1;
-        $this->TimeTrackerActivity->contain = array('User');
+        $this->TimeTrackerActivity->recursive = 0;
         $this->set('timeTrackerActivities', $this->Paginator->paginate());
     }
 
@@ -113,6 +112,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         $activitiesUserByDate = array();
         $dateFilter = '';
         $totalTimeWorked = '00:00:00';
+
         if(!empty($date)){
             $conditions = array(
                 'TimeTrackerActivity.date'    => $date,
@@ -153,6 +153,7 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
 
         }
         if ($this->request->is('post')) {
+
             $dataToSave = $this->request->data;
             if(empty($date)){
                 if(is_array($dataToSave['TimeTrackerActivity']['date'])) {
@@ -163,8 +164,8 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             }
             // Recovery time remaining for this date
             $durationAll = $this->TimeTrackerActivity->durationToDayByUser($date, $this->Auth->user('id'));
-            debug($durationAll);
             $timeLeft    = TimeUtil::subtractionTime(Configure::read('hoursInWorkDay'), $durationAll);
+
 
             // Prepare array
             $dataToSave['TimeTrackerActivity']['user_id']  = $this->Auth->user('id');
@@ -173,21 +174,23 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
             }
             if($dataToSave['TimeTrackerActivity']['duration'] > $timeLeft) {
                 $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
-                $this->request->data = $dataToSave;
-                return $this->redirect($this->referer());
-            }
-            $this->TimeTrackerActivity->create();
-            if ($this->TimeTrackerActivity->save($dataToSave)) {
-                $this->Session->setFlash(__('The time tracker activity has been saved.'));
-                return $this->redirect(array('action' => 'index'));
+                $this->data = $dataToSave;
             } else {
-                $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'));
+                $this->TimeTrackerActivity->create();
+                if ($this->TimeTrackerActivity->save($dataToSave)) {
+                    $this->Session->setFlash(__('The time tracker activity has been saved.'));
+                    return $this->redirect(array('action' => 'index'));
+                } else {
+                    $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
+                    $this->data = $dataToSave;
+                    $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'));
+                }
             }
-        } else {
-            $timeTrackerCustomers = $this->TimeTrackerActivity->TimeTrackerCustomer->find('list');
-            $timeTrackerCategories = $this->TimeTrackerActivity->TimeTrackerCategory->generateTreeList(null, null, null, '　');
-            $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories'));
+
         }
+        $timeTrackerCustomers = $this->TimeTrackerActivity->TimeTrackerCustomer->find('list');
+        $timeTrackerCategories = $this->TimeTrackerActivity->TimeTrackerCategory->generateTreeList(null, null, null, '　');
+        $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories'));
 
         $this->set(compact('timeTrackerCustomers', 'timeTrackerCategories', 'activitiesUserByDate', 'dateFilter', 'totalTimeWorked'));
     }
@@ -205,7 +208,9 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         }
 
         $timeTrackerActivity = $this->TimeTrackerActivity->findById($id, array('fields' => 'user_id'));
+
         if($this->Auth->user('id') != $timeTrackerActivity['TimeTrackerActivity']['user_id']){
+            $this->data = $dataToSave;
             $this->Session->setFlash(__('You can not change what he does not belong to you.'));
             return $this->redirect($this->referer());
         }
@@ -224,16 +229,17 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
 
             if($dataToSave['TimeTrackerActivity']['duration'] > $timeLeft) {
                 $this->Session->setFlash(__('The seizure duration is greater than the time remaining on that date. Please, try again.'));
-                return $this->redirect($this->referer());
-            }
-
-
-            $this->TimeTrackerActivity->create();
-            if ($this->TimeTrackerActivity->save($dataToSave)) {
-                $this->Session->setFlash(__('The time tracker activity has been saved.'));
-                return $this->redirect(array('action' => 'index'));
+                $this->data = $dataToSave;
             } else {
-                $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'));
+                $this->TimeTrackerActivity->create();
+                if ($this->TimeTrackerActivity->save($dataToSave)) {
+                    $this->Session->setFlash(__('The time tracker activity has been saved.'));
+                    return $this->redirect(array('action' => 'index'));
+                } else {
+                    $dataToSave['TimeTrackerActivity']['date']     = CakeTime::format('Y-m-d', $dataToSave['TimeTrackerActivity']['date']);
+                    $this->data = $dataToSave;
+                    $this->Session->setFlash(__('The time tracker activity could not be saved. Please, try again.'));
+                }
             }
         } else {
             $options = array('conditions' => array('TimeTrackerActivity.' . $this->TimeTrackerActivity->primaryKey => $id));
@@ -274,63 +280,6 @@ class TimeTrackerActivitiesController extends TimeTrackerAppController {
         } else {
             $this->Session->setFlash(__('The time tracker activity could not be deleted. Please, try again.'));
         }
-        return $this->redirect(array('action' => 'index'));
-    }
-
-
-    public function export(){
-        // Recherche des TimeTrackerActivity et Users
-
-        $order  = array('TimeTrackerActivity.date ASC');
-        $fields = array(
-            'TimeTrackerActivity.id',
-            'TimeTrackerActivity.date',
-            'TimeTrackerActivity.duration',
-            'TimeTrackerActivity.comment',
-            'TimeTrackerActivity.created',
-            'TimeTrackerActivity.modified',
-            'TimeTrackerCategory.id',
-            'TimeTrackerCategory.name',
-            Configure::read('user.model') . '.id',
-            Configure::read('user.model') . '.' . Configure::read('user.firstname'),
-            Configure::read('user.model') . '.' . Configure::read('user.lastname'),
-            'TimeTrackerCustomer.id',
-            'TimeTrackerCustomer.name',
-
-        );
-
-        $joins  = array(
-            array(
-                'table' => Configure::read('user.table'),
-                'alias' => Configure::read('user.model'),
-                'type' => 'inner',
-                'foreignKey' => false,
-                'conditions' => array(
-                    'TimeTrackerActivity.user_id = ' . Configure::read('user.model') . '.id',
-                ),
-            ),
-            array(
-                'table' => 'time_tracker_categories',
-                'alias' => 'TimeTrackerCategory',
-                'type' => 'inner',
-                'foreignKey' => false,
-                'conditions' => array(
-                    'TimeTrackerActivity.time_tracker_category_id = TimeTrackerCategory.id',
-                ),
-            ),
-            array(
-                'table' => 'time_tracker_customers',
-                'alias' => 'TimeTrackerCustomer',
-                'type' => 'inner',
-                'foreignKey' => false,
-                'conditions' => array(
-                    'TimeTrackerActivity.time_tracker_customer_id = TimeTrackerCustomer.id',
-                ),
-            ),
-        );
-
-        $TimeTrackerActivity    = ClassRegistry::init('TimeTracker.TimeTrackerActivity');
-        $timeTrackerActivities = $TimeTrackerActivity->find('all', array('order' => $order, 'fields' => $fields, 'joins' => $joins));
-        $this->set(compact('timeTrackerActivities'));
+        return $this->redirect($this->referer());
     }
 }

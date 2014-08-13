@@ -27,7 +27,7 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
             'notEmpty' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'Thank you to enter a duration.',
-                'allowEmpty' => true,
+                'allowEmpty' => false,
                 'required' => true,
             ),
         ),
@@ -72,20 +72,19 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
         foreach ($resultats as $clef => $val) {
             if (is_array($val) && !empty($val[$this->alias])) {
                 if (isset($val[$this->alias]['date'])) {
-                    $resultats[$clef][$this->alias]['date_humanized'] = CakeTime::format('d/m/Y ', $val[$this->alias]['date']);
+                    $resultats[$clef][$this->alias]['date_humanized'] = CakeTime::format('d/m/Y', $val[$this->alias]['date']);
                 }
                 if (isset($val[$this->alias]['created'])) {
-                    $resultats[$clef][$this->alias]['created_humanized'] = CakeTime::format('d/m/Y ', $val[$this->alias]['created']);
+                    $resultats[$clef][$this->alias]['created_humanized'] = CakeTime::format('d/m/Y h:i:s', $val[$this->alias]['created']);
                 }
                 if (isset($val[$this->alias]['modified'])) {
-                    $resultats[$clef][$this->alias]['modified_humanized'] = CakeTime::format('d/m/Y ', $val[$this->alias]['modified']);
+                    $resultats[$clef][$this->alias]['modified_humanized'] = CakeTime::format('d/m/Y h:i:s', $val[$this->alias]['modified']);
                 }
             }
         }
         return $resultats;
     }
     public function durationToDayByUser($date, $user) {
-        debug($date);
         // Recovery time remaining for this date
         $conditions = array(
             'TimeTrackerActivity.user_id' => $user,
@@ -97,7 +96,6 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
         $timeTrackerActivities = $this->find('all', array('conditions' => $conditions, 'fields' => $fields));
 
         $timeLeft = '00:00:00';
-        debug($timeTrackerActivities);
         foreach ($timeTrackerActivities as $timeTrackerActivity) {
             $timeLeft = TimeUtil::additionTime($timeLeft, $timeTrackerActivity['TimeTrackerActivity']['duration']);
         }
@@ -126,7 +124,7 @@ class TimeTrackerActivity extends TimeTrackerAppModel {
             return $query;
         }
 
-        $hoursWorkedPerDay = array();
+        $hoursWorkedPerUser = array();
         foreach ($results as $result) {
             $nameUser = $result[Configure::read('user.model')][Configure::read('user.firstname')] . ' ' . $result[Configure::read('user.model')][Configure::read('user.lastname')];
             if(empty($hoursWorkedPerUser[$nameUser])) {

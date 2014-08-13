@@ -4,7 +4,7 @@
 		<legend><?php echo __('Edit Time Tracker Activity'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('date');
+		echo $this->Form->input('date', array('type' => 'text', 'placeholder' => '0000-00-00'));
 		echo $this->Form->input('user_id', array('type' => 'hidden'));
         echo $this->Form->input('time_tracker_customer_id', array('label' => 'Customer', 'empty' => __('Choose a customer')));
         echo $this->Form->input('time_tracker_category_id', array('label' => 'Category', 'empty' => __('Choose a category')));
