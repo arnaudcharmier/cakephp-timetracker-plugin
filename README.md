@@ -26,3 +26,13 @@ in your plugin directory type
         git submodule add git://github.com/freega/cakephp-timetracker-plugin.git TimeTracker  
         
 Download an archive from github and extract it in /Plugin/TimeTracker  
+
+#Configuration  
+Add in AppModel :  
+class AppModel extends Model {  
+
+        var $recursive = -1;  
+
+        public $validationDomain = "validation_errors";
+}
+
