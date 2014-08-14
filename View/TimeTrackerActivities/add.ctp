@@ -1,3 +1,4 @@
+<?php debug(Configure::read('Config.language')); ?>
 <div class="timeTrackerActivities form">
 <?php if(!empty($activitiesUserByDate)){ ?>
     <fieldset>
@@ -44,8 +45,8 @@
         } else {
             echo $this->Form->input('date', array('type' => 'text', 'placeholder' => '0000-00-00'));
         }
-        echo $this->Form->input('time_tracker_customer_id', array('label' => 'Customer', 'empty' => __('Choose a customer')));
-        echo $this->Form->input('time_tracker_category_id', array('label' => 'Category', 'empty' => __('Choose a category')));
+        echo $this->Form->input('time_tracker_customer_id', array('label' => __('Customer'), 'empty' => __('Choose a customer')));
+        echo $this->Form->input('time_tracker_category_id', array('label' => __('Category'), 'empty' => __('Choose a category')));
         echo $this->Form->input('duration', array('type' => 'text', 'placeholder' => "00:00:00"));
         echo $this->Form->input('comment');
     ?>

@@ -1,0 +1,40 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TimeTracker Validate\n"
+"POT-Creation-Date: 2014-08-14 09:45+0200\n"
+"PO-Revision-Date: 2014-08-14 10:03+0100\n"
+"Last-Translator: Arnaud Charmier <a.charmier@ubitransports.com>\n"
+"Language-Team: Arnaud Charmier <a.charmier@ubitransports.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: Français\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-Basepath: /var/www/sites/dev/app/Plugin/TimeTracker\n"
+
+#: Model/TimeTrackerActivity.php:validation for field date
+msgid "Thank you to enter a date."
+msgstr "Merci de saisir une date."
+
+#: Model/TimeTrackerActivity.php:validation for field duration
+msgid "Thank you to enter a duration."
+msgstr "Merci de saisir une durée."
+
+#: Model/TimeTrackerActivity.php:validation for field time_tracker_customer_id
+msgid "Thank you to enter a customer."
+msgstr "Merci de saisir un client."
+
+#: Model/TimeTrackerActivity.php:validation for field time_tracker_category_id
+msgid "Thank you to enter a category."
+msgstr "Merci de saisir une catégorie."
+
+#: Model/TimeTrackerCategory.php:validation for field name
+#: Model/TimeTrackerCustomer.php:validation
+msgid "Thank you to enter a name."
+msgstr "Merci de saisir un nom."
