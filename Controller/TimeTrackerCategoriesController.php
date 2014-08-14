@@ -46,7 +46,9 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
             )
         ));
 
-        $timeTrackerCategoryChildren = $this->TimeTrackerCategory->children($id);
+        $timeTrackerCategoryChildren    = $this->TimeTrackerCategory->children($id);
+
+        $timeTrackerCategoryParent      = $this->TimeTrackerCategory->getParentNode($id);
 
         // Recherche des TimeTrackerActivity et Users
         $conditions = array(
@@ -100,7 +102,7 @@ class TimeTrackerCategoriesController extends TimeTrackerAppController {
         $TimeTrackerActivity    = ClassRegistry::init('TimeTracker.TimeTrackerActivity');
         $timeTrackerActivities = $TimeTrackerActivity->find('all', array('conditions' => $conditions, 'order' => $order, 'fields' => $fields, 'joins' => $joins));
 
-        $this->set(compact('timeTrackerCategory', 'timeTrackerActivities', 'timeTrackerCategoryChildren'));
+        $this->set(compact('timeTrackerCategory', 'timeTrackerActivities', 'timeTrackerCategoryChildren', 'timeTrackerCategoryParent'));
     }
 
 /**

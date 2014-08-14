@@ -9,14 +9,16 @@
 		<dd>
 			<?php echo h($timeTrackerCategory['TimeTrackerCategory']['name']); ?>
 		</dd>
-		<dt><?php echo __('Comment'); ?></dt>
-		<dd>
-			<?php echo h($timeTrackerCategory['TimeTrackerCategory']['comment']); ?>
-		</dd>
-		<?php if(isset($timeTrackerCategory['ParentTimeTrackerCategory']['name'])) { ?>
+		<?php if(!empty($timeTrackerCategory['TimeTrackerCategory']['comment'])) { ?>
+			<dt><?php echo __('Comment'); ?></dt>
+			<dd>
+				<?php echo h($timeTrackerCategory['TimeTrackerCategory']['comment']); ?>
+			</dd>
+		<?php } ?>
+		<?php if(isset($timeTrackerCategoryParent['TimeTrackerCategory']['name'])) { ?>
 			<dt><?php echo __('Parent Category'); ?></dt>
 			<dd>
-				<?php echo $this->Html->link($timeTrackerCategory['ParentTimeTrackerCategory']['name'], array('controller' => 'time_tracker_categories', 'action' => 'view', $timeTrackerCategory['ParentTimeTrackerCategory']['id'])); ?>
+				<?php echo $this->Html->link($timeTrackerCategoryParent['TimeTrackerCategory']['name'], array('controller' => 'time_tracker_categories', 'action' => 'view', $timeTrackerCategoryParent['TimeTrackerCategory']['id'])); ?>
 			</dd>
 		<?php } ?>
 		<dt><?php echo __('Created'); ?></dt>

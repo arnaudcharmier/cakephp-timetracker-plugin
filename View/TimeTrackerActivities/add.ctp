@@ -1,4 +1,3 @@
-<?php debug(Configure::read('Config.language')); ?>
 <div class="timeTrackerActivities form">
 <?php if(!empty($activitiesUserByDate)){ ?>
     <fieldset>
